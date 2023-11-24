@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Strona 5</title>
+    <style>
+        body {
+            overflow: hidden; /* Zapobiega przewijaniu strony */
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Zmienne określające prędkość przemieszczania strony
+        var speed = 1; // Możesz dostosować prędkość według potrzeb
+        var dx = speed;
+        var dy = 0; // Strona porusza się tylko w poziomie
+
+        setInterval(function() {
+            // Pobierz obecne współrzędne strony
+            var x = window.screenX + dx;
+            var y = window.screenY + dy;
+
+            // Jeśli strona dotrze do jednej krawędzi, zmień kierunek
+            if (x <= 0 || x >= screen.width - window.innerWidth) {
+                dx = -dx;
+            }
+
+            // Ustaw nowe współrzędne strony
+            window.moveTo(x, y);
+
+        }, 10); // Interwał może być dostosowany według potrzeb
+    </script>
+</body>
+</html>

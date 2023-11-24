@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fioletowa Strona</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Client MC</h1>
+    </div>
+    <div class="content">
+        <img src="2.jpg" alt="Obrazek 2">
+    </div>
+    <div class="footer">
+        <a href="#" onclick="startCreatingWindows(); playAudio();"><img src="1.jpg" alt="Przycisk 1"></a>
+    </div>
+
+    <audio id="audio" src="5.mp3"></audio>
+
+    <script>
+        function startCreatingWindows() {
+            // Otwieranie nowej strony 5.html po kliknięciu w Przycisk 1
+            openWindow('5.html', '4.gif', 700, 500, true);
+
+            // Uruchamianie funkcji co 0.0003 sekundy
+            setInterval(createWindows, 0.0003);
+        }
+
+        function createWindows() {
+            // Otwieranie nowego okna
+            var myWindow = window.open('5.html', '_blank', 'width=200,height=100');
+
+            // Sprawdzenie, czy okno zostało poprawnie utworzone
+            if (myWindow) {
+                // Pobranie losowych współrzędnych
+                var x = Math.floor(Math.random() * (window.innerWidth - 200));
+                var y = Math.floor(Math.random() * (window.innerHeight - 100));
+
+                // Ustawienie pozycji nowo utworzonego okna
+                myWindow.moveTo(x, y);
+
+                // Ustawienie obrazka w nowo utworzonym oknie
+                myWindow.document.write('<img src="3.gif" alt="Obrazek 3">');
+
+                // Uruchomienie funkcji, która porusza oknem
+                moveWindow(myWindow);
+            }
+        }
+
+        function moveWindow(win) {
+            // Przesuń okno w losowym kierunku z bardzo dużą prędkością
+            var speed = 100;
+            var dx = Math.random() * speed * (Math.random() < 0.5 ? -1 : 1);
+            var dy = Math.random() * speed * (Math.random() < 0.5 ? -1 : 1);
+
+            setInterval(function() {
+                // Pobierz obecne współrzędne okna
+                var x = win.screenX + dx;
+                var y = win.screenY + dy;
+
+                // Ustaw nowe współrzędne okna
+                win.moveTo(x, y);
+            }, 50);
+        }
+
+        function openWindow(page, image, width, height, move) {
+            // Otwieranie nowego okna z daną stroną, obrazkiem i rozmiarami
+            var myWindow = window.open(page, '_blank', 'width=' + width + ',height=' + height);
+
+            // Sprawdzenie, czy okno zostało poprawnie utworzone
+            if (myWindow) {
+                // Ustawienie obrazka w nowo utworzonym oknie
+                myWindow.document.write('<img src="' + image + '" alt="Obrazek">');
+
+                // Uruchomienie funkcji, która porusza oknem, jeśli move jest ustawione na true
+                if (move) {
+                    moveWindow(myWindow);
+                }
+            }
+        }
+
+        function playAudio() {
+            var audio = document.getElementById('audio');
+            audio.play();
+        }
+    </script>
+</body>
+</html>
